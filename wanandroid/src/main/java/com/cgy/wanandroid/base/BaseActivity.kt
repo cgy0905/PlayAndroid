@@ -169,7 +169,8 @@ abstract class BaseActivity : AppCompatActivity() {
             ViewGroup.LayoutParams.WRAP_CONTENT,
             WindowManager.LayoutParams.TYPE_APPLICATION,
             WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE or WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
-            PixelFormat.TRANSLUCENT)
+            PixelFormat.TRANSLUCENT
+        )
         mLayoutParams.gravity = Gravity.TOP
         mLayoutParams.x = 0
         mLayoutParams.y = 0
@@ -179,12 +180,13 @@ abstract class BaseActivity : AppCompatActivity() {
     private fun initListener() {
         mLayoutStatusView?.setOnClickListener(mRetryClickListener)
     }
-    open val mRetryClickListener : View.OnClickListener = View.OnClickListener {
+
+    open val mRetryClickListener: View.OnClickListener = View.OnClickListener {
         start()
     }
 
-    protected fun initToolbar(toolbar : Toolbar, homeAsUpEnabled : Boolean, title : String) {
-        toolbar?.title  = title
+    protected fun initToolbar(toolbar: Toolbar, homeAsUpEnabled: Boolean, title: String) {
+        toolbar?.title = title
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(homeAsUpEnabled)
     }
@@ -193,12 +195,12 @@ abstract class BaseActivity : AppCompatActivity() {
      * Network Change
      */
     @Subscribe(threadMode = ThreadMode.MAIN)
-    fun onNetworkChangeEvent(event : NetworkChangeEvent) {
+    fun onNetworkChangeEvent(event: NetworkChangeEvent) {
         hasNetwork = event.isConnected
         checkNetwork(event.isConnected)
     }
 
-    private fun checkNetwork(isConnected : Boolean) {
+    private fun checkNetwork(isConnected: Boolean) {
         if (enableNetworkTip()) {
             if (isConnected) {
                 doReConnected()
@@ -206,7 +208,7 @@ abstract class BaseActivity : AppCompatActivity() {
                     mWindowManager.removeView(mTipView)
                 }
 
-            }  else {
+            } else {
                 if (mTipView.parent == null) {
                     mWindowManager.addView(mTipView, mLayoutParams)
                 }
