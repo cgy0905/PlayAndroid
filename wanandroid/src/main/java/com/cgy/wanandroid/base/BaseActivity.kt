@@ -12,12 +12,11 @@ import android.support.v7.widget.Toolbar
 import android.view.*
 import com.afollestad.materialdialogs.color.CircleView
 import com.cgy.wanandroid.R
+import com.cgy.wanandroid.app.App
 import com.cgy.wanandroid.constant.Constant
 import com.cgy.wanandroid.event.NetworkChangeEvent
 import com.cgy.wanandroid.receiver.NetworkChangeReceiver
-import com.cgy.wanandroid.utils.Preference
-import com.cgy.wanandroid.utils.SettingUtil
-import com.cgy.wanandroid.utils.StatusBarUtil
+import com.cgy.wanandroid.utils.*
 import com.cxz.multiplestatusview.MultipleStatusView
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
@@ -220,10 +219,54 @@ abstract class BaseActivity : AppCompatActivity() {
         if (ev?.action == MotionEvent.ACTION_UP) {
             val v = currentFocus
             //如果不是落在EditText区域,则需要关闭输入法
-//            if (KeyBoardUtil.isHideKeyboard(v, ev)) {
-////                KeyBoardUtil.hideKeyBoard(this, v)
-////            }
+            if (KeyBoardUtil.isHideKeyboard(v, ev)) {
+                KeyBoardUtil.hideKeyBoard(this, v)
+            }
         }
         return super.dispatchTouchEvent(ev)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        when (item?.itemId) {
+            android.R.id.home -> {
+                onBackPressed()
+            }
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        //Fragment逐个出栈
+        val count = supportFragmentManager.backStackEntryCount
+        if (count == 0) {
+            super.onBackPressed()
+        } else {
+            supportFragmentManager.popBackStack()
+        }
+    }
+
+    override fun onPause() {
+        if (mNetworkChangeReceiver != null) {
+            unregisterReceiver(mNetworkChangeReceiver)
+            mNetworkChangeReceiver = null
+        }
+        super.onPause()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        if (useEventBus()) {
+            EventBus.getDefault().unregister(this)
+        }
+        CommonUtil.fixInputMethodManagerLeak(this)
+        App.getRefWatcher(this)?.watch(this)
+    }
+
+    override fun finish() {
+        super.finish()
+        if (mTipView != null && mTipView.parent != null) {
+            mWindowManager.removeView(mTipView)
+        }
     }
 }
