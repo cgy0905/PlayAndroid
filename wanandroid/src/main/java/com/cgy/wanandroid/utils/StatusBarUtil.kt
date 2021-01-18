@@ -1,4 +1,4 @@
-package com.cxz.wanandroid.utils
+package com.cgy.wanandroid.utils
 
 import android.annotation.TargetApi
 import android.app.Activity
@@ -13,7 +13,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
 import android.widget.LinearLayout
-import com.cxz.wanandroid.R
+import com.cgy.wanandroid.R
 
 
 /**

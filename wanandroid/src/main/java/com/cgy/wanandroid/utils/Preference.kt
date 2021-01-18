@@ -1,23 +1,24 @@
-package com.cxz.wanandroid.utils
+package com.cgy.wanandroid.utils
 
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.SharedPreferences
-import com.cxz.wanandroid.app.App
+import com.cgy.wanandroid.app.App
 import java.io.*
 import kotlin.jvm.Throws
 import kotlin.reflect.KProperty
 
 /**
- * Created by chenxz on 2018/4/21.
- * kotlin委托属性+SharedPreference实例
+ * @author: cgy
+ * @date: 2021/1/18 5:28 PM
+ * @description: kotlin委托属性+SharedPreference实例
  */
-class Preference<T>(val name: String, private val default: T) {
+class Preference<T>(val name : String, private val default : T) {
 
     companion object {
         private val file_name = "wan_android_file"
 
-        private val prefs: SharedPreferences by lazy {
+        private val prefs : SharedPreferences by lazy {
             App.context.getSharedPreferences(file_name, Context.MODE_PRIVATE)
         }
 
@@ -31,7 +32,7 @@ class Preference<T>(val name: String, private val default: T) {
         /**
          * 根据key删除存储数据
          */
-        fun clearPreference(key: String) {
+        fun clearPreference(key : String) {
             prefs.edit().remove(key).apply()
         }
 
@@ -41,26 +42,25 @@ class Preference<T>(val name: String, private val default: T) {
          * @param key
          * @return
          */
-        fun contains(key: String): Boolean {
+        fun contains(key : String) : Boolean {
             return prefs.contains(key)
         }
 
         /**
          * 返回所有的键值对
-         *
          * @param context
          * @return
          */
-        fun getAll(): Map<String, *> {
+        fun getAll() : Map<String, *> {
             return prefs.all
         }
     }
 
-    operator fun getValue(thisRef: Any?, property: KProperty<*>): T {
+    operator fun getValue(thisRef : Any?, property : KProperty<*>) : T {
         return getSharedPreferences(name, default)
     }
 
-    operator fun setValue(thisRef: Any?, property: KProperty<*>, value: T) {
+    operator fun setValue(thisRef: Any?, property: KProperty<*>, value : T) {
         putSharedPreferences(name, value)
     }
 
@@ -77,8 +77,8 @@ class Preference<T>(val name: String, private val default: T) {
     }
 
     @Suppress("UNCHECKED_CAST")
-    private fun getSharedPreferences(name: String, default: T): T = with(prefs) {
-        val res: Any = when (default) {
+    private fun getSharedPreferences(name: String, default: T) : T = with(prefs) {
+        val res : Any = when (default) {
             is Long -> getLong(name, default)
             is String -> getString(name, default)
             is Int -> getInt(name, default)
@@ -99,10 +99,9 @@ class Preference<T>(val name: String, private val default: T) {
      * @throws IOException
      */
     @Throws(IOException::class)
-    private fun <A> serialize(obj: A): String {
+    private fun <A> serialize(obj : A) : String {
         val byteArrayOutputStream = ByteArrayOutputStream()
-        val objectOutputStream = ObjectOutputStream(
-                byteArrayOutputStream)
+        val objectOutputStream = ObjectOutputStream(byteArrayOutputStream)
         objectOutputStream.writeObject(obj)
         var serStr = byteArrayOutputStream.toString("ISO-8859-1")
         serStr = java.net.URLEncoder.encode(serStr, "UTF-8")
@@ -124,12 +123,13 @@ class Preference<T>(val name: String, private val default: T) {
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IOException::class, ClassNotFoundException::class)
-    private fun <A> deSerialization(str: String): A {
+    private fun <A> deSerialization(str : String) : A {
         val redStr = java.net.URLDecoder.decode(str, "UTF-8")
         val byteArrayInputStream = ByteArrayInputStream(
-                redStr.toByteArray(charset("ISO-8859-1")))
+            redStr.toByteArray(charset("ISO-8850-1")))
         val objectInputStream = ObjectInputStream(
-                byteArrayInputStream)
+            byteArrayInputStream
+        )
         val obj = objectInputStream.readObject() as A
         objectInputStream.close()
         byteArrayInputStream.close()
