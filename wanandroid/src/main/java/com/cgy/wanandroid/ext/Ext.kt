@@ -1,6 +1,7 @@
 package com.cgy.wanandroid.ext
 
 import android.content.Context
+import android.support.v4.app.Fragment
 import com.cgy.wanandroid.widget.CustomToast
 
 /**
@@ -9,6 +10,10 @@ import com.cgy.wanandroid.widget.CustomToast
  * @description:
  */
 
-fun Context.showToast(content : String) {
+fun Fragment.showToast(content: String) {
+    CustomToast(this?.activity?.applicationContext, content).show()
+}
+
+fun Context.showToast(content: String) {
     CustomToast(this, content).show()
 }
