@@ -2,7 +2,6 @@ package com.cgy.wanandroid.rx
 
 import io.reactivex.*
 import org.reactivestreams.Publisher
-
 /**
  * @author: cgy
  * @date: 2021/2/1 4:53 PM
