@@ -1,6 +1,5 @@
 package com.cgy.wanandroid.ext
 
-<<<<<<< HEAD
 import com.cgy.wanandroid.R
 import com.cgy.wanandroid.app.App
 import com.cgy.wanandroid.base.IModel
@@ -14,13 +13,6 @@ import com.cgy.wanandroid.utils.SchedulerUtils
 import io.reactivex.Observable
 import io.reactivex.Observer
 import io.reactivex.disposables.Disposable
-=======
-import com.cgy.wanandroid.base.IModel
-import com.cgy.wanandroid.base.IView
-import com.cgy.wanandroid.mvp.model.BaseBean
-import io.reactivex.Observable
-import io.reactivex.Scheduler
->>>>>>> 8498841430c0e33b46220b33763488c31ae26332
 
 /**
  * @author: cgy
@@ -28,7 +20,7 @@ import io.reactivex.Scheduler
  * @description:
  */
 fun <T : BaseBean> Observable<T>.ss(
-<<<<<<< HEAD
+
     model: IModel?,
     view: IView?,
     isShowLoading: Boolean = true,
@@ -97,12 +89,4 @@ fun <T : BaseBean> Observable<T>.sss(
             view?.hideLoading()
             view?.showError(ExceptionHandle.handleException(it))
         })
-=======
-    model : IModel?,
-    view : IView?,
-    isShowLoading : Boolean = true,
-    onSuccess: (T) -> Unit
-) {
-    this.compose(SchedulerUtils.ioToMain())
->>>>>>> 8498841430c0e33b46220b33763488c31ae26332
 }
