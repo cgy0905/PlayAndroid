@@ -1,3 +1,2 @@
-include ':vlayout'
 include ':wanandroid'
 include ':app', ':multiple-status-view', ':verticaltablayout'
