@@ -2,6 +2,7 @@ package com.cgy.wanandroid.api
 
 import com.cgy.wanandroid.mvp.Banner
 import com.cgy.wanandroid.mvp.HttpResult
+import com.cgy.wanandroid.mvp.UserInfoBody
 import io.reactivex.Observable
 import retrofit2.http.*
 
@@ -97,12 +98,12 @@ interface ApiService {
 //                           @Field("password") password: String,
 //                           @Field("repassword") repassword: String): Observable<HttpResult<LoginData>>
 //
-//    /**
-//     * 退出登录
-//     * http://www.wanandroid.com/user/logout/json
-//     */
-//    @GET("user/logout/json")
-//    fun logout(): Observable<HttpResult<Any>>
+    /**
+     * 退出登录
+     * http://www.wanandroid.com/user/logout/json
+     */
+    @GET("user/logout/json")
+    fun logout(): Observable<HttpResult<Any>>
 //
 //    /**
 //     *  获取收藏列表
@@ -283,12 +284,12 @@ interface ApiService {
 //                        @Query("k") key: String,
 //                        @Path("page") page: Int): Observable<HttpResult<ArticleResponseBody>>
 //
-//    /**
-//     * 获取个人积分，需要登录后访问
-//     * https://www.wanandroid.com/lg/coin/userinfo/json
-//     */
-//    @GET("/lg/coin/userinfo/json")
-//    fun getUserInfo(): Observable<HttpResult<UserInfoBody>>
+    /**
+     * 获取个人积分，需要登录后访问
+     * https://www.wanandroid.com/lg/coin/userinfo/json
+     */
+    @GET("/lg/coin/userinfo/json")
+    fun getUserInfo(): Observable<HttpResult<UserInfoBody>>
 //
 //    /**
 //     * 获取个人积分列表，需要登录后访问

@@ -1,12 +1,452 @@
 package com.cgy.wanandroid
 
-import android.support.v7.app.AppCompatActivity
+import android.content.DialogInterface
 import android.os.Bundle
+import android.support.design.widget.BottomNavigationView
+import android.support.design.widget.NavigationView
+import android.support.v4.app.FragmentTransaction
+import android.support.v4.view.MenuItemCompat
+import android.support.v7.app.ActionBarDrawerToggle
+import android.support.v7.app.AppCompatDelegate
+import android.view.*
+import android.widget.ImageView
+import android.widget.TextView
+import com.cgy.wanandroid.base.BaseMvpActivity
+import com.cgy.wanandroid.constant.Constant
+import com.cgy.wanandroid.ext.showToast
+import com.cgy.wanandroid.mvp.UserInfoBody
+import com.cgy.wanandroid.mvp.contract.MainContract
+import com.cgy.wanandroid.mvp.presenter.MainPresenter
+import com.cgy.wanandroid.ui.fragment.*
+import com.cgy.wanandroid.utils.DialogUtil
+import com.cgy.wanandroid.utils.Preference
+import com.cgy.wanandroid.utils.SettingUtil
+import com.tencent.bugly.beta.Beta
+import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.toolbar.*
+import java.lang.Exception
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : BaseMvpActivity<MainContract.View, MainContract.Presenter>(),
+    MainContract.View {
+
+    private val BOTTOM_INDEX: String = "bottom_index"
+
+    private val FRAGMENT_HOME = 0x01
+    private val FRAGMENT_SQUARE = 0x02
+    private val FRAGMENT_WECHAT = 0x03
+    private val FRAGMENT_SYSTEM = 0x04
+    private val FRAGMENT_PROJECT = 0x05
+
+    private var mIndex = FRAGMENT_HOME
+
+    private var mHomeFragment: HomeFragment? = null
+    private var mSquareFragment: SquareFragment? = null
+    private var mWeChatFragment: WeChatFragment? = null
+    private var mSystemFragment: SystemFragment? = null
+    private var mProjectFragment: ProjectFragment? = null
+
+    private var exitTime: Long = 0
+
+    private var username: String by Preference(Constant.USERNAME_KEY, "")
+
+    /**
+     * username TextView
+     */
+    private var nav_username: TextView? = null
+
+    /**
+     * user_id TextView
+     */
+    private var nav_user_id: TextView? = null
+
+    /**
+     * user_grade TextView
+     */
+    private var nav_user_grade: TextView? = null
+
+    /**
+     * user_rank TextView
+     */
+    private var nav_user_rank: TextView? = null
+
+    /**
+     * score TextView
+     */
+    private var nav_score: TextView? = null
+
+    /**
+     * rank ImageView
+     */
+    private var nav_rank: ImageView? = null
+
+    override fun createPresenter(): MainContract.Presenter = MainPresenter()
+
+    override fun attachLayoutRes(): Int = R.layout.activity_main
+
+    override fun useEventBus(): Boolean = true
+
+    override fun initData() {
+        Beta.checkUpgrade(false, false)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        if (savedInstanceState != null) {
+            mIndex = savedInstanceState?.getInt(BOTTOM_INDEX)
+        }
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+    }
+
+    override fun initView() {
+        super.initView()
+        toolbar.run {
+            title = getString(R.string.app_name)
+            setSupportActionBar(this)
+        }
+
+        bottom_navigation.run {
+            // 以前使用 BottomNavigationViewHelper.disableShiftMode(this) 方法来设置底部图标和字体都显示并去掉点击动画
+            // 升级到 28.0.0 之后，官方重构了 BottomNavigationView ，目前可以使用 labelVisibilityMode = 1 来替代
+            // BottomNavigationViewHelper.disableShiftMode(this)
+            labelVisibilityMode = 1
+            setOnNavigationItemSelectedListener(onNavigationItemSelectedListener)
+        }
+
+        initDrawerLayout()
+
+        initNavView()
+
+        showFragment(mIndex)
+
+        floating_action_btn.run {
+            setOnClickListener(onFABClickListener)
+        }
+
+
+    }
+
+    override fun start() {
+        //获取用户信息
+    }
+
+    override fun initColor() {
+        super.initColor()
+
+    }
+
+    private fun initNavView() {
+        nav_view.run {
+            setNavigationItemSelectedListener(onDrawerNavigationItemSelectedListener)
+            nav_username = getHeaderView(0).findViewById(R.id.tv_username)
+            nav_user_id = getHeaderView(0).findViewById(R.id.tv_user_id)
+            nav_user_grade = getHeaderView(0).findViewById(R.id.tv_user_grade)
+            nav_user_rank = getHeaderView(0).findViewById(R.id.tv_user_rank)
+            nav_rank = getHeaderView(0).findViewById(R.id.iv_rank)
+            nav_score =
+                MenuItemCompat.getActionView(nav_view.menu.findItem(R.id.nav_score)) as TextView
+            nav_score?.gravity = Gravity.CENTER_VERTICAL
+            menu.findItem(R.id.nav_logout).isVisible = isLogin
+        }
+    }
+
+    /**
+     * init DrawerLayout
+     */
+    private fun initDrawerLayout() {
+        drawer_layout.run {
+            val toggle = ActionBarDrawerToggle(
+                this@MainActivity, this, toolbar,
+                R.string.navigation_drawer_open,
+                R.string.navigation_drawer_close
+            )
+            addDrawerListener(toggle)
+            toggle.syncState()
+        }
+    }
+
+    override fun onSaveInstanceState(outState: Bundle?) {
+        super.onSaveInstanceState(outState)
+        outState?.putInt(BOTTOM_INDEX, mIndex)
+    }
+
+    /**
+     * show Fragment
+     */
+    private fun showFragment(index: Int) {
+        val transaction = supportFragmentManager.beginTransaction()
+        hideFragments(transaction)
+        mIndex = index
+        when (index) {
+            FRAGMENT_HOME //首页
+            -> {
+                toolbar.title = getString(R.string.app_name)
+                if (mHomeFragment == null) {
+                    mHomeFragment = HomeFragment.getInstance()
+                    transaction.add(R.id.container, mHomeFragment!!, "home")
+                } else {
+                    transaction.show(mHomeFragment!!)
+                }
+            }
+            FRAGMENT_SQUARE  // 广场
+            -> {
+                toolbar.title = getString(R.string.square)
+                if (mSquareFragment == null) {
+                    mSquareFragment = SquareFragment.getInstance()
+                    transaction.add(R.id.container, mSquareFragment!!, "square")
+                } else {
+                    transaction.show(mSquareFragment!!)
+                }
+            }
+            FRAGMENT_SYSTEM // 体系
+            -> {
+                toolbar.title = getString(R.string.knowledge_system)
+                if (mSystemFragment == null) {
+                    mSystemFragment = SystemFragment.getInstance()
+                    transaction.add(R.id.container, mSystemFragment!!, "system")
+                } else {
+                    transaction.show(mSystemFragment!!)
+                }
+            }
+            FRAGMENT_PROJECT // 项目
+            -> {
+                toolbar.title = getString(R.string.project)
+                if (mProjectFragment == null) {
+                    mProjectFragment = ProjectFragment.getInstance()
+                    transaction.add(R.id.container, mProjectFragment!!, "project")
+                } else {
+                    transaction.show(mProjectFragment!!)
+                }
+            }
+            FRAGMENT_WECHAT // 公众号
+            -> {
+                toolbar.title = getString(R.string.wechat)
+                if (mWeChatFragment == null) {
+                    mWeChatFragment = WeChatFragment.getInstance()
+                    transaction.add(R.id.container, mWeChatFragment!!, "wechat")
+                } else {
+                    transaction.show(mWeChatFragment!!)
+                }
+            }
+        }
+        transaction.commit()
+    }
+
+    /**
+     * 隐藏所有的Fragment
+     */
+    private fun hideFragments(transaction: FragmentTransaction) {
+        mHomeFragment?.let { transaction.hide(it) }
+        mSquareFragment?.let { transaction.hide(it) }
+        mSystemFragment?.let { transaction.hide(it) }
+        mProjectFragment?.let { transaction.hide(it) }
+        mWeChatFragment?.let { transaction.hide(it) }
+    }
+
+    /**
+     * NavigationItemSelect监听
+     */
+    private val onNavigationItemSelectedListener =
+        BottomNavigationView.OnNavigationItemSelectedListener { item ->
+            return@OnNavigationItemSelectedListener when (item.itemId) {
+                R.id.action_home -> {
+                    showFragment(FRAGMENT_HOME)
+                    true
+                }
+                R.id.action_square -> {
+                    showFragment(FRAGMENT_SQUARE)
+                    true
+                }
+                R.id.action_system -> {
+                    showFragment(FRAGMENT_SYSTEM)
+                    true
+                }
+                R.id.action_project -> {
+                    showFragment(FRAGMENT_PROJECT)
+                    true
+                }
+                R.id.action_wechat -> {
+                    showFragment(FRAGMENT_WECHAT)
+                    true
+                }
+                else -> {
+                    false
+                }
+            }
+        }
+
+    private val onDrawerNavigationItemSelectedListener =
+        NavigationView.OnNavigationItemSelectedListener { item ->
+            when (item.itemId) {
+                R.id.nav_score -> {
+                    if (isLogin) {
+                        //跳转积分界面
+                    } else {
+                        showToast(resources.getString(R.string.login_tint))
+                        goLogin()
+                    }
+                }
+                R.id.nav_collect -> {
+                    if (isLogin) {
+                        goCommonActivity(Constant.Type.COLLECT_TYPE_KEY)
+                    } else {
+                        showToast(resources.getString(R.string.login_tint))
+                        goLogin()
+                    }
+                }
+                R.id.nav_share -> {
+                    if (isLogin) {
+                        //分享页面
+                    } else {
+                        showToast(resources.getString(R.string.login_tint))
+                        goLogin()
+                    }
+                }
+                R.id.nav_setting -> {
+                    //跳转设置界面
+                }
+                R.id.nav_logout -> {
+                    logout()
+                }
+
+                R.id.nav_night_mode -> {
+                    if (SettingUtil.getIsNightMode()) {
+                        SettingUtil.setIsNightMode(false)
+                        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+                    } else {
+                        SettingUtil.setIsNightMode(true)
+                        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+                    }
+                    window.setWindowAnimations(R.style.WindowAnimationFadeInOut)
+                    recreate()
+                }
+                R.id.nav_todo -> {
+                    if (isLogin) {
+                        //跳转todo页面
+                    } else {
+                        showToast(resources.getString(R.string.login_tint))
+                        goLogin()
+                    }
+                }
+            }
+            true
+        }
+
+
+    private fun goCommonActivity(type: String) {
+
+    }
+
+
+
+    /**
+     * 去登录页面
+     */
+    private fun goLogin() {
+    }
+
+    override fun recreate() {
+        try {
+            val fragmentTransaction = supportFragmentManager.beginTransaction()
+            if (mHomeFragment != null) {
+                fragmentTransaction.remove(mHomeFragment!!)
+            }
+            if (mSquareFragment != null) {
+                fragmentTransaction.remove(mSquareFragment!!)
+            }
+            if (mSystemFragment != null) {
+                fragmentTransaction.remove(mSystemFragment!!)
+            }
+            if (mProjectFragment != null) {
+                fragmentTransaction.remove(mProjectFragment!!)
+            }
+            if (mWeChatFragment != null) {
+                fragmentTransaction.remove(mWeChatFragment!!)
+            }
+            fragmentTransaction.commitAllowingStateLoss()
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+        super.recreate()
+    }
+
+    /**
+     * 退出登录
+     */
+    private val mDialog by lazy {
+        DialogUtil.getWaitDialog(this, resources.getString(R.string.logout_ing))
+    }
+
+    private fun logout() {
+        DialogUtil.getConfirmDialog(this, resources.getString(R.string.confirm_logout),
+        DialogInterface.OnClickListener {_, _, ->
+            mDialog.show()
+
+        }).show()
+    }
+
+    override fun showLogoutSuccess(success: Boolean) {
+        TODO("Not yet implemented")
+    }
+
+    override fun showUserInfo(bean: UserInfoBody) {
+        TODO("Not yet implemented")
+    }
+
+    private val onFABClickListener = View.OnClickListener {
+        when (mIndex) {
+            FRAGMENT_HOME -> {
+                //mHomeFragment?.scrollToTop()
+            }
+            FRAGMENT_SQUARE -> {
+                //mSquareFragment?.scrollToTop()
+            }
+            FRAGMENT_SYSTEM -> {
+                //mSystemFragment?.scrollToTop()
+            }
+            FRAGMENT_PROJECT -> {
+                //mProjectFragment?.scrollToTop()
+            }
+            FRAGMENT_WECHAT -> {
+                //mWeChatFragment?.scrollToTop()
+            }
+        }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        if (mIndex != FRAGMENT_SQUARE) {
+            menuInflater.inflate(R.menu.menu_activity_main, menu)
+        }
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        when (item?.itemId) {
+            R.id.action_search -> {
+                //搜索页面
+                return true
+            }
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
+    override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            if (System.currentTimeMillis().minus(exitTime) <= 2000) {
+                finish()
+            } else {
+                exitTime = System.currentTimeMillis()
+                showToast(resources.getString(R.string.exit_tip))
+            }
+            return true
+        }
+        return super.onKeyDown(keyCode, event)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        mHomeFragment = null
+        mSquareFragment = null
+        mSystemFragment = null
+        mProjectFragment = null
+        mWeChatFragment = null
     }
 }
