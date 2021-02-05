@@ -1,8 +1,9 @@
 package com.cgy.wanandroid.api
 
-import com.cgy.wanandroid.mvp.Banner
-import com.cgy.wanandroid.mvp.HttpResult
-import com.cgy.wanandroid.mvp.UserInfoBody
+import com.cgy.wanandroid.mvp.model.bean.Banner
+import com.cgy.wanandroid.mvp.model.bean.HttpResult
+import com.cgy.wanandroid.mvp.model.bean.LoginData
+import com.cgy.wanandroid.mvp.model.bean.UserInfoBody
 import io.reactivex.Observable
 import retrofit2.http.*
 
@@ -74,30 +75,30 @@ interface ApiService {
 //    @GET("project/list/{page}/json")
 //    fun getProjectList(@Path("page") page: Int, @Query("cid") cid: Int): Observable<HttpResult<ArticleResponseBody>>
 //
-//    /**
-//     * 登录
-//     * http://www.wanandroid.com/user/login
-//     * @param username
-//     * @param password
-//     */
-//    @POST("user/login")
-//    @FormUrlEncoded
-//    fun loginWanAndroid(@Field("username") username: String,
-//                        @Field("password") password: String): Observable<HttpResult<LoginData>>
-//
-//    /**
-//     * 注册
-//     * http://www.wanandroid.com/user/register
-//     * @param username
-//     * @param password
-//     * @param repassword
-//     */
-//    @POST("user/register")
-//    @FormUrlEncoded
-//    fun registerWanAndroid(@Field("username") username: String,
-//                           @Field("password") password: String,
-//                           @Field("repassword") repassword: String): Observable<HttpResult<LoginData>>
-//
+    /**
+     * 登录
+     * http://www.wanandroid.com/user/login
+     * @param username
+     * @param password
+     */
+    @POST("user/login")
+    @FormUrlEncoded
+    fun login(@Field("username") username: String,
+                        @Field("password") password: String): Observable<HttpResult<LoginData>>
+
+    /**
+     * 注册
+     * http://www.wanandroid.com/user/register
+     * @param username
+     * @param password
+     * @param repassword
+     */
+    @POST("user/register")
+    @FormUrlEncoded
+    fun register(@Field("username") username: String,
+                           @Field("password") password: String,
+                           @Field("repassword") repassword: String): Observable<HttpResult<LoginData>>
+
     /**
      * 退出登录
      * http://www.wanandroid.com/user/logout/json

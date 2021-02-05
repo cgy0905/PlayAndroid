@@ -21,12 +21,12 @@ interface RegisterContract {
 
     interface Presenter : IPresenter<View> {
 
-        fun registerWanAndroid(username: String, password: String, repassword: String)
+        fun register(username: String, password: String, repassword: String)
 
     }
 
     interface Model : IModel {
-        fun registerWanAndroid(username: String, password: String, repassword: String): Observable<HttpResult<LoginData>>
+        fun register(username: String, password: String, repassword: String): Observable<HttpResult<LoginData>>
     }
 
 }

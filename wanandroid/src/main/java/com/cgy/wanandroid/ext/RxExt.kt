@@ -7,7 +7,7 @@ import com.cgy.wanandroid.base.IView
 import com.cgy.wanandroid.http.exception.ErrorStatus
 import com.cgy.wanandroid.http.exception.ExceptionHandle
 import com.cgy.wanandroid.http.function.RetryWithDelay
-import com.cgy.wanandroid.mvp.model.BaseBean
+import com.cgy.wanandroid.mvp.model.bean.BaseBean
 import com.cgy.wanandroid.utils.NetWorkUtil
 import com.cgy.wanandroid.utils.SchedulerUtils
 import io.reactivex.Observable

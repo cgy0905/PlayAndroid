@@ -429,7 +429,7 @@ class MainActivity : BaseMvpActivity<MainContract.View, MainContract.Presenter>(
     }
 
     /**
-     * 去登陆页面
+     * 去登录页面
      */
     private fun goLogin() {
         Intent(this@MainActivity, LoginActivity::class.java).run {

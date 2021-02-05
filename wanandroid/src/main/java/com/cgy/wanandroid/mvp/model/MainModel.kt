@@ -2,8 +2,8 @@ package com.cgy.wanandroid.mvp.model
 
 import com.cgy.wanandroid.base.BaseModel
 import com.cgy.wanandroid.http.RetrofitHelper
-import com.cgy.wanandroid.mvp.HttpResult
-import com.cgy.wanandroid.mvp.UserInfoBody
+import com.cgy.wanandroid.mvp.model.bean.HttpResult
+import com.cgy.wanandroid.mvp.model.bean.UserInfoBody
 import com.cgy.wanandroid.mvp.contract.MainContract
 import io.reactivex.Observable
 

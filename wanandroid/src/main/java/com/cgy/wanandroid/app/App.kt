@@ -12,7 +12,7 @@ import com.cgy.wanandroid.BuildConfig
 import com.cgy.wanandroid.R
 import com.cgy.wanandroid.constant.Constant
 import com.cgy.wanandroid.ext.showToast
-import com.cgy.wanandroid.mvp.UserInfoBody
+import com.cgy.wanandroid.mvp.model.bean.UserInfoBody
 import com.cgy.wanandroid.utils.CommonUtil
 import com.cgy.wanandroid.utils.DisplayManager
 import com.cgy.wanandroid.utils.SettingUtil
@@ -23,10 +23,8 @@ import com.squareup.leakcanary.LeakCanary
 import com.squareup.leakcanary.RefWatcher
 import com.tencent.bugly.Bugly
 import com.tencent.bugly.beta.Beta
-import com.tencent.bugly.beta.upgrade.UpgradeListener
 import com.tencent.bugly.beta.upgrade.UpgradeStateListener
 import com.tencent.bugly.crashreport.CrashReport
-import org.jetbrains.anko.appcompat.v7.Appcompat
 import org.litepal.LitePal
 import java.util.*
 import kotlin.properties.Delegates

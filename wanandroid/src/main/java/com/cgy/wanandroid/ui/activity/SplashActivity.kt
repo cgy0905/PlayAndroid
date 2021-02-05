@@ -1,10 +1,8 @@
 package com.cgy.wanandroid.ui.activity
 
 import android.content.Intent
-import android.os.Bundle
 import android.view.animation.AlphaAnimation
 import android.view.animation.Animation
-import com.cgy.wanandroid.MainActivity
 import com.cgy.wanandroid.R
 import com.cgy.wanandroid.base.BaseActivity
 import kotlinx.android.synthetic.main.activity_splash.*
@@ -36,7 +34,7 @@ class SplashActivity : BaseActivity() {
                 }
 
                 override fun onAnimationStart(animation: Animation?) {
-                    TODO("Not yet implemented")
+
                 }
 
             })

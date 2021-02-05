@@ -1,6 +1,5 @@
-package com.cgy.wanandroid.mvp
+package com.cgy.wanandroid.mvp.model.bean
 
-import com.cgy.wanandroid.mvp.model.BaseBean
 import com.squareup.moshi.Json
 
 /**
@@ -28,4 +27,16 @@ data class Banner(
     @Json(name = "title") val title: String,
     @Json(name = "type") val type: Int,
     @Json(name = "url") val url: String
+)
+//登录数据
+data class LoginData(
+    @Json(name = "chapterTops") val chapterTops: MutableList<String>,
+    @Json(name = "collectIds") val collectIds: MutableList<String>,
+    @Json(name = "email") val email: String,
+    @Json(name = "icon") val icon: String,
+    @Json(name = "id") val id: Int,
+    @Json(name = "password") val password: String,
+    @Json(name = "token") val token: String,
+    @Json(name = "type") val type: Int,
+    @Json(name = "username") val username: String
 )

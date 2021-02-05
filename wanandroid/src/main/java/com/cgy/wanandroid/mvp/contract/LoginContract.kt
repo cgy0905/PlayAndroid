@@ -4,28 +4,28 @@ import com.cgy.wanandroid.base.IModel
 import com.cgy.wanandroid.base.IPresenter
 import com.cgy.wanandroid.base.IView
 import com.cgy.wanandroid.mvp.model.bean.HttpResult
-import com.cgy.wanandroid.mvp.model.bean.UserInfoBody
+import com.cgy.wanandroid.mvp.model.bean.LoginData
 import io.reactivex.Observable
 
 /**
  * @author: cgy
- * @date: 2021/2/3 11:00 AM
+ * @date: 2021/2/4 3:26 PM
  * @description:
  */
-interface MainContract {
+interface LoginContract {
 
     interface View : IView {
-        fun showLogoutSuccess(success : Boolean)
-        fun showUserInfo(bean : UserInfoBody)
+        fun loginSuccess(data : LoginData)
+
+        fun loginFail()
     }
 
     interface Presenter : IPresenter<View> {
-        fun logout()
-        fun getUserInfo()
+
+        fun login(username : String, password : String)
     }
 
     interface Model : IModel {
-        fun logout() : Observable<HttpResult<Any>>
-        fun getUserInfo() : Observable<HttpResult<UserInfoBody>>
+        fun login(username: String, password: String) : Observable<HttpResult<LoginData>>
     }
 }

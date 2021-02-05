@@ -1,6 +1,7 @@
-package com.cgy.wanandroid
+package com.cgy.wanandroid.ui.activity
 
 import android.content.DialogInterface
+import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
 import android.support.design.widget.NavigationView
@@ -11,10 +12,13 @@ import android.support.v7.app.AppCompatDelegate
 import android.view.*
 import android.widget.ImageView
 import android.widget.TextView
+import com.cgy.wanandroid.R
+import com.cgy.wanandroid.app.App
 import com.cgy.wanandroid.base.BaseMvpActivity
 import com.cgy.wanandroid.constant.Constant
+import com.cgy.wanandroid.event.LoginEvent
 import com.cgy.wanandroid.ext.showToast
-import com.cgy.wanandroid.mvp.UserInfoBody
+import com.cgy.wanandroid.mvp.model.bean.UserInfoBody
 import com.cgy.wanandroid.mvp.contract.MainContract
 import com.cgy.wanandroid.mvp.presenter.MainPresenter
 import com.cgy.wanandroid.ui.fragment.*
@@ -24,6 +28,11 @@ import com.cgy.wanandroid.utils.SettingUtil
 import com.tencent.bugly.beta.Beta
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.toolbar.*
+import org.greenrobot.eventbus.EventBus
+import org.greenrobot.eventbus.Subscribe
+import org.greenrobot.eventbus.ThreadMode
+import org.jetbrains.anko.doAsync
+import org.jetbrains.anko.uiThread
 import java.lang.Exception
 
 class MainActivity : BaseMvpActivity<MainContract.View, MainContract.Presenter>(),
@@ -81,7 +90,8 @@ class MainActivity : BaseMvpActivity<MainContract.View, MainContract.Presenter>(
 
     override fun createPresenter(): MainContract.Presenter = MainPresenter()
 
-    override fun attachLayoutRes(): Int = R.layout.activity_main
+    override fun attachLayoutRes(): Int =
+        R.layout.activity_main
 
     override fun useEventBus(): Boolean = true
 
@@ -145,6 +155,19 @@ class MainActivity : BaseMvpActivity<MainContract.View, MainContract.Presenter>(
                 MenuItemCompat.getActionView(nav_view.menu.findItem(R.id.nav_score)) as TextView
             nav_score?.gravity = Gravity.CENTER_VERTICAL
             menu.findItem(R.id.nav_logout).isVisible = isLogin
+        }
+        nav_username?.run {
+            text = if (!isLogin) getString(R.string.go_login) else username
+            setOnClickListener {
+                if (!isLogin) {
+                    Intent(this@MainActivity, LoginActivity::class.java).run {
+                        startActivity(this)
+                    }
+                }
+            }
+        }
+        nav_rank?.setOnClickListener{
+            //跳转排行榜页面
         }
     }
 
@@ -341,6 +364,9 @@ class MainActivity : BaseMvpActivity<MainContract.View, MainContract.Presenter>(
      * 去登录页面
      */
     private fun goLogin() {
+        Intent(this, LoginActivity::class.java).run {
+            startActivity(this)
+        }
     }
 
     override fun recreate() {
@@ -379,16 +405,56 @@ class MainActivity : BaseMvpActivity<MainContract.View, MainContract.Presenter>(
         DialogUtil.getConfirmDialog(this, resources.getString(R.string.confirm_logout),
         DialogInterface.OnClickListener {_, _, ->
             mDialog.show()
+            mPresenter?.logout()
 
         }).show()
     }
 
     override fun showLogoutSuccess(success: Boolean) {
-        TODO("Not yet implemented")
+        if (success) {
+            doAsync {
+                Preference.clearPreference()
+                uiThread {
+                    mDialog.dismiss()
+                    showToast(resources.getString(R.string.logout_success))
+                    username = nav_username?.text.toString().trim()
+                    isLogin = false
+                    EventBus.getDefault().post(LoginEvent(false))
+                }
+            }
+        }
     }
 
+    /**
+     * 显示用户信息,包括积分、等级、排名
+     */
     override fun showUserInfo(bean: UserInfoBody) {
-        TODO("Not yet implemented")
+        App.userInfo = bean
+
+        nav_user_id?.text = bean.userId.toString()
+        nav_user_grade?.text = (bean.coinCount / 100 + 1).toString()
+        nav_user_rank?.text = bean.rank.toString()
+        nav_score?.text = bean.coinCount.toString()
+
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    fun loginEvent(event : LoginEvent) {
+        if (event.isLogin) {
+            nav_username?.text = username
+            nav_view.menu.findItem(R.id.nav_logout).isVisible = true
+            mHomeFragment?.lazyLoad()
+            mPresenter?.getUserInfo()
+        } else {
+            nav_username?.text = resources.getString(R.string.go_login)
+            nav_view.menu.findItem(R.id.nav_logout).isVisible = false
+            mHomeFragment?.lazyLoad()
+            //重置用户信息
+            nav_user_id?.text = getString(R.string.nav_line_4)
+            nav_user_grade?.text = getString(R.string.nav_line_2)
+            nav_user_rank?.text = getString(R.string.nav_line_2)
+            nav_score?.text = ""
+        }
     }
 
     private val onFABClickListener = View.OnClickListener {
@@ -410,6 +476,8 @@ class MainActivity : BaseMvpActivity<MainContract.View, MainContract.Presenter>(
             }
         }
     }
+
+
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         if (mIndex != FRAGMENT_SQUARE) {

@@ -26,6 +26,10 @@ class HomeFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_home, container, false)
     }
 
+    fun lazyLoad() {
+
+    }
+
 
 //    override fun scrollToTop() {
 //        recyclerView.run {

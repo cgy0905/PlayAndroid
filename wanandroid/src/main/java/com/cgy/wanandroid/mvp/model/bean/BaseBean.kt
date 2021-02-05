@@ -1,4 +1,4 @@
-package com.cgy.wanandroid.mvp.model
+package com.cgy.wanandroid.mvp.model.bean
 
 /**
  * @author: cgy
