@@ -26,7 +26,6 @@ import com.cgy.wanandroid.widget.SpaceItemDecoration
 import com.chad.library.adapter.base.BaseQuickAdapter
 import io.reactivex.Observable
 import kotlinx.android.synthetic.main.fragment_refresh_layout.*
-import kotlinx.android.synthetic.main.item_home_banner.*
 import kotlinx.android.synthetic.main.item_home_banner.view.*
 
 /**

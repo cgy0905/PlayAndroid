@@ -19,6 +19,7 @@ import com.cgy.wanandroid.base.BaseMvpActivity
 import com.cgy.wanandroid.constant.Constant
 import com.cgy.wanandroid.event.ColorEvent
 import com.cgy.wanandroid.event.LoginEvent
+import com.cgy.wanandroid.event.RefreshHomeEvent
 import com.cgy.wanandroid.ext.showToast
 import com.cgy.wanandroid.mvp.model.bean.UserInfoBody
 import com.cgy.wanandroid.mvp.contract.MainContract
@@ -477,6 +478,13 @@ class MainActivity : BaseMvpActivity<MainContract.View, MainContract.Presenter>(
             nav_user_grade?.text = getString(R.string.nav_line_2)
             nav_user_rank?.text = getString(R.string.nav_line_2)
             nav_score?.text = ""
+        }
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    fun refreshHomeEvent(event : RefreshHomeEvent) {
+        if (event.isRefresh) {
+            mHomeFragment?.lazyLoad()
         }
     }
 
