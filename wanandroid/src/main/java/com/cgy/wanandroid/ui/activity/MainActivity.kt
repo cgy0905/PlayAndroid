@@ -2,6 +2,7 @@ package com.cgy.wanandroid.ui.activity
 
 import android.content.DialogInterface
 import android.content.Intent
+import android.content.res.ColorStateList
 import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
 import android.support.design.widget.NavigationView
@@ -16,6 +17,7 @@ import com.cgy.wanandroid.R
 import com.cgy.wanandroid.app.App
 import com.cgy.wanandroid.base.BaseMvpActivity
 import com.cgy.wanandroid.constant.Constant
+import com.cgy.wanandroid.event.ColorEvent
 import com.cgy.wanandroid.event.LoginEvent
 import com.cgy.wanandroid.ext.showToast
 import com.cgy.wanandroid.mvp.model.bean.UserInfoBody
@@ -140,6 +142,7 @@ class MainActivity : BaseMvpActivity<MainContract.View, MainContract.Presenter>(
 
     override fun initColor() {
         super.initColor()
+        refreshColor(ColorEvent(true))
 
     }
 
@@ -353,6 +356,26 @@ class MainActivity : BaseMvpActivity<MainContract.View, MainContract.Presenter>(
             true
         }
 
+    private val onFABClickListener = View.OnClickListener {
+        when (mIndex) {
+            FRAGMENT_HOME -> {
+                mHomeFragment?.scrollToTop()
+            }
+            FRAGMENT_SQUARE -> {
+                //mSquareFragment?.scrollToTop()
+            }
+            FRAGMENT_SYSTEM -> {
+                //mSystemFragment?.scrollToTop()
+            }
+            FRAGMENT_PROJECT -> {
+                //mProjectFragment?.scrollToTop()
+            }
+            FRAGMENT_WECHAT -> {
+                //mWeChatFragment?.scrollToTop()
+            }
+        }
+    }
+
 
     private fun goCommonActivity(type: String) {
 
@@ -457,23 +480,11 @@ class MainActivity : BaseMvpActivity<MainContract.View, MainContract.Presenter>(
         }
     }
 
-    private val onFABClickListener = View.OnClickListener {
-        when (mIndex) {
-            FRAGMENT_HOME -> {
-                //mHomeFragment?.scrollToTop()
-            }
-            FRAGMENT_SQUARE -> {
-                //mSquareFragment?.scrollToTop()
-            }
-            FRAGMENT_SYSTEM -> {
-                //mSystemFragment?.scrollToTop()
-            }
-            FRAGMENT_PROJECT -> {
-                //mProjectFragment?.scrollToTop()
-            }
-            FRAGMENT_WECHAT -> {
-                //mWeChatFragment?.scrollToTop()
-            }
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    fun refreshColor(event : ColorEvent) {
+        if (event.isRefresh) {
+            nav_view.getHeaderView(0).setBackgroundColor(mThemeColor)
+            floating_action_btn.backgroundTintList = ColorStateList.valueOf(mThemeColor)
         }
     }
 

@@ -51,6 +51,15 @@ fun Activity.showSnackMsg(msg: String) {
     snackbar.show()
 }
 
+fun Fragment.showSnackMsg(msg: String) {
+    this.activity ?: return
+    val snackbar = Snackbar.make(this.activity!!.window.decorView, msg, Snackbar.LENGTH_SHORT)
+    val view = snackbar.view
+    view.findViewById<TextView>(R.id.snackbar_text)
+        .setTextColor(ContextCompat.getColor(this.activity!!, R.color.white))
+    snackbar.show()
+}
+
 var <T : View> T.lastClickTime: Long
     set(value) = setTag(1766613352, value)
     get() = getTag(1766613352) as? Long ?: 0

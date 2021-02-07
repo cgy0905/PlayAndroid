@@ -1,9 +1,6 @@
 package com.cgy.wanandroid.api
 
-import com.cgy.wanandroid.mvp.model.bean.Banner
-import com.cgy.wanandroid.mvp.model.bean.HttpResult
-import com.cgy.wanandroid.mvp.model.bean.LoginData
-import com.cgy.wanandroid.mvp.model.bean.UserInfoBody
+import com.cgy.wanandroid.mvp.model.bean.*
 import io.reactivex.Observable
 import retrofit2.http.*
 
@@ -20,22 +17,22 @@ interface ApiService {
      */
     @GET("banner/json")
     fun getBanners(): Observable<HttpResult<List<Banner>>>
-//
-//    /**
-//     * 获取首页置顶文章列表
-//     * http://www.wanandroid.com/article/top/json
-//     */
-//    @GET("article/top/json")
-//    fun getTopArticles(): Observable<HttpResult<MutableList<Article>>>
-//
-//    /**
-//     * 获取文章列表
-//     * http://www.wanandroid.com/article/list/0/json
-//     * @param pageNum
-//     */
-//    @GET("article/list/{pageNum}/json")
-//    fun getArticles(@Path("pageNum") pageNum: Int): Observable<HttpResult<ArticleResponseBody>>
-//
+
+    /**
+     * 获取首页置顶文章列表
+     * http://www.wanandroid.com/article/top/json
+     */
+    @GET("article/top/json")
+    fun getTopArticles(): Observable<HttpResult<MutableList<Article>>>
+
+    /**
+     * 获取文章列表
+     * http://www.wanandroid.com/article/list/0/json
+     * @param pageNum
+     */
+    @GET("article/list/{pageNum}/json")
+    fun getArticles(@Path("pageNum") pageNum: Int): Observable<HttpResult<ArticleResponseBody>>
+
 //    /**
 //     * 获取知识体系
 //     * http://www.wanandroid.com/tree/json
@@ -114,13 +111,13 @@ interface ApiService {
 //    @GET("lg/collect/list/{page}/json")
 //    fun getCollectList(@Path("page") page: Int): Observable<HttpResult<BaseListResponseBody<CollectionArticle>>>
 //
-//    /**
-//     * 收藏站内文章
-//     * http://www.wanandroid.com/lg/collect/1165/json
-//     * @param id article id
-//     */
-//    @POST("lg/collect/{id}/json")
-//    fun addCollectArticle(@Path("id") id: Int): Observable<HttpResult<Any>>
+    /**
+     * 收藏站内文章
+     * http://www.wanandroid.com/lg/collect/1165/json
+     * @param id article id
+     */
+    @POST("lg/collect/{id}/json")
+    fun addCollectArticle(@Path("id") id: Int): Observable<HttpResult<Any>>
 //
 //    /**
 //     * 收藏站外文章
@@ -135,13 +132,13 @@ interface ApiService {
 //                                 @Field("author") author: String,
 //                                 @Field("link") link: String): Observable<HttpResult<Any>>
 //
-//    /**
-//     * 文章列表中取消收藏文章
-//     * http://www.wanandroid.com/lg/uncollect_originId/2333/json
-//     * @param id
-//     */
-//    @POST("lg/uncollect_originId/{id}/json")
-//    fun cancelCollectArticle(@Path("id") id: Int): Observable<HttpResult<Any>>
+    /**
+     * 文章列表中取消收藏文章
+     * http://www.wanandroid.com/lg/uncollect_originId/2333/json
+     * @param id
+     */
+    @POST("lg/uncollect_originId/{id}/json")
+    fun cancelCollectArticle(@Path("id") id: Int): Observable<HttpResult<Any>>
 //
 //    /**
 //     * 收藏列表中取消收藏文章
