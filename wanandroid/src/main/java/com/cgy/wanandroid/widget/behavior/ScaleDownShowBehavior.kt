@@ -57,7 +57,7 @@ class ScaleDownShowBehavior : FloatingActionButton.Behavior {
             type
         )
         if (dyConsumed > 0 && child.visibility == View.VISIBLE) {
-            child.visibility = View.VISIBLE
+            child.visibility = View.INVISIBLE
         } else if (dyConsumed < 0 && child.visibility != View.VISIBLE) {
             child.show()
         }

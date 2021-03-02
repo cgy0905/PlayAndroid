@@ -151,12 +151,12 @@ interface ApiService {
 //    fun removeCollectArticle(@Path("id") id: Int,
 //                             @Field("originId") originId: Int = -1): Observable<HttpResult<Any>>
 //
-//    /**
-//     * 搜索热词
-//     * http://www.wanandroid.com/hotkey/json
-//     */
-//    @GET("hotkey/json")
-//    fun getHotSearchData(): Observable<HttpResult<MutableList<HotSearchBean>>>
+    /**
+     * 搜索热词
+     * http://www.wanandroid.com/hotkey/json
+     */
+    @GET("hotkey/json")
+    fun getHotSearchData(): Observable<HttpResult<MutableList<HotSearchBean>>>
 //
 //    /**
 //     * 搜索
@@ -288,6 +288,7 @@ interface ApiService {
      */
     @GET("/lg/coin/userinfo/json")
     fun getUserInfo(): Observable<HttpResult<UserInfoBody>>
+
 //
 //    /**
 //     * 获取个人积分列表，需要登录后访问

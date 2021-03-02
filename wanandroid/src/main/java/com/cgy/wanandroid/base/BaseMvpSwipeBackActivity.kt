@@ -45,6 +45,10 @@ abstract class BaseMvpSwipeBackActivity<in V : IView, P : IPresenter<V>> : BaseM
         return mHelper.swipeBackLayout
     }
 
+    override fun setSwipeBackEnable(enable: Boolean) {
+        swipeBackLayout.setEnableGesture(enable)
+    }
+
     override fun scrollToFinishActivity() {
         Utils.convertActivityFromTranslucent(this)
         swipeBackLayout.scrollToFinishActivity()

@@ -509,6 +509,9 @@ class MainActivity : BaseMvpActivity<MainContract.View, MainContract.Presenter>(
         when (item?.itemId) {
             R.id.action_search -> {
                 //搜索页面
+                Intent(this, SearchActivity::class.java).run {
+                    startActivity(this)
+                }
                 return true
             }
         }
