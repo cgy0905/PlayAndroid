@@ -157,13 +157,13 @@ interface ApiService {
      */
     @GET("hotkey/json")
     fun getHotSearchData(): Observable<HttpResult<MutableList<HotSearchBean>>>
-//
-//    /**
-//     * 搜索
-//     * http://www.wanandroid.com/article/query/0/json
-//     * @param page
-//     * @param key
-//     */
+
+    /**
+     * 搜索
+     * http://www.wanandroid.com/article/query/0/json
+     * @param page
+     * @param key
+     */
     @POST("article/query/{page}/json")
     @FormUrlEncoded
     fun queryBySearchKey(@Path("page") page: Int,
@@ -332,13 +332,13 @@ interface ApiService {
 //     */
 //    @POST("lg/user_article/delete/{id}/json")
 //    fun deleteShareArticle(@Path("id") id: Int): Observable<HttpResult<Any>>
-//
-//    /**
-//     * 广场列表数据
-//     * https://wanandroid.com/user_article/list/0/json
-//     * @param page 页码拼接在url上从0开始
-//     */
-//    @GET("user_article/list/{page}/json")
-//    fun getSquareList(@Path("page") page: Int): Observable<HttpResult<ArticleResponseBody>>
+
+    /**
+     * 广场列表数据
+     * https://wanandroid.com/user_article/list/0/json
+     * @param page 页码拼接在url上从0开始
+     */
+    @GET("user_article/list/{page}/json")
+    fun getSquareList(@Path("page") page: Int): Observable<HttpResult<ArticleResponseBody>>
 
 }
