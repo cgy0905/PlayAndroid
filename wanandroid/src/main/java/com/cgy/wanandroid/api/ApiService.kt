@@ -164,11 +164,11 @@ interface ApiService {
 //     * @param page
 //     * @param key
 //     */
-//    @POST("article/query/{page}/json")
-//    @FormUrlEncoded
-//    fun queryBySearchKey(@Path("page") page: Int,
-//                         @Field("k") key: String): Observable<HttpResult<ArticleResponseBody>>
-//
+    @POST("article/query/{page}/json")
+    @FormUrlEncoded
+    fun queryBySearchKey(@Path("page") page: Int,
+                         @Field("k") key: String): Observable<HttpResult<ArticleResponseBody>>
+
 //    /**
 //     * 获取TODO列表数据
 //     * http://wanandroid.com/lg/todo/list/0/json

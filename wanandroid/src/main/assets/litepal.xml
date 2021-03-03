@@ -33,7 +33,7 @@
     	</list>
     -->
     <list>
-        <mapping class="com.cxz.wanandroid.mvp.model.bean.SearchHistoryBean" />
+        <mapping class="com.cgy.wanandroid.mvp.model.bean.SearchHistoryBean" />
     </list>
 
     <!--

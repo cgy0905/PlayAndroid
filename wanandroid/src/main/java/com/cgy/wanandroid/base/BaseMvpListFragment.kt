@@ -18,7 +18,7 @@ abstract class BaseMvpListFragment<in V : IView, P : IPresenter<V>> : BaseMvpFra
     /**
      * 每页数据个数
      */
-    private var pageSize = 20
+    protected var pageSize = 20
 
     /**
      * 是否是下拉刷新
