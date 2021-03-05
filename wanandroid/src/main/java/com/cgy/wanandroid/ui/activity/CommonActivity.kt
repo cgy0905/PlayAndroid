@@ -7,6 +7,7 @@ import com.cgy.wanandroid.constant.Constant
 import com.cgy.wanandroid.event.ColorEvent
 import com.cgy.wanandroid.ui.fragment.QrCodeFragment
 import com.cgy.wanandroid.ui.fragment.SearchListFragment
+import com.cgy.wanandroid.ui.fragment.ShareArticleFragment
 import kotlinx.android.synthetic.main.toolbar.*
 import org.greenrobot.eventbus.EventBus
 
@@ -39,6 +40,11 @@ class CommonActivity : BaseSwipeBackActivity() {
             Constant.Type.SEARCH_TYPE_KEY -> {
                 toolbar.title = extras.getString(Constant.SEARCH_KEY, "")
                 SearchListFragment.getInstance(extras)
+            }
+
+            Constant.Type.SHARE_ARTICLE_TYPE_KEY -> {
+                toolbar.title = getString(R.string.share_article)
+                ShareArticleFragment.getInstance()
             }
             Constant.Type.SCAN_QR_CODE_TYPE_KEY->{
                 toolbar.title = getString(R.string.scan_code_download)

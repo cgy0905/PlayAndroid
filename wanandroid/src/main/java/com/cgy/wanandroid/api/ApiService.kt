@@ -314,16 +314,16 @@ interface ApiService {
 //    @GET("user/lg/private_articles/{page}/json")
 //    fun getShareList(@Path("page") page: Int): Observable<HttpResult<ShareResponseBody>>
 //
-//    /**
-//     * 分享文章
-//     * https://www.wanandroid.com/lg/user_article/add/json
-//     * @param map
-//     *      title: 文章标题
-//     *      link:  文章链接
-//     */
-//    @POST("lg/user_article/add/json")
-//    @FormUrlEncoded
-//    fun shareArticle(@FieldMap map: MutableMap<String, Any>): Observable<HttpResult<Any>>
+    /**
+     * 分享文章
+     * https://www.wanandroid.com/lg/user_article/add/json
+     * @param map
+     *      title: 文章标题
+     *      link:  文章链接
+     */
+    @POST("lg/user_article/add/json")
+    @FormUrlEncoded
+    fun shareArticle(@FieldMap map: MutableMap<String, Any>): Observable<HttpResult<Any>>
 //
 //    /**
 //     * 删除自己分享的文章
