@@ -363,10 +363,10 @@ class MainActivity : BaseMvpActivity<MainContract.View, MainContract.Presenter>(
                 mHomeFragment?.scrollToTop()
             }
             FRAGMENT_SQUARE -> {
-                //mSquareFragment?.scrollToTop()
+                mSquareFragment?.scrollToTop()
             }
             FRAGMENT_SYSTEM -> {
-                //mSystemFragment?.scrollToTop()
+                mSystemFragment?.scrollToTop()
             }
             FRAGMENT_PROJECT -> {
                 //mProjectFragment?.scrollToTop()

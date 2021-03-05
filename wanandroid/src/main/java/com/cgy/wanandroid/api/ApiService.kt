@@ -33,13 +33,13 @@ interface ApiService {
     @GET("article/list/{pageNum}/json")
     fun getArticles(@Path("pageNum") pageNum: Int): Observable<HttpResult<ArticleResponseBody>>
 
-//    /**
-//     * 获取知识体系
-//     * http://www.wanandroid.com/tree/json
-//     */
-//    @GET("tree/json")
-//    fun getKnowledgeTree(): Observable<HttpResult<List<KnowledgeTreeBody>>>
-//
+    /**
+     * 获取知识体系
+     * http://www.wanandroid.com/tree/json
+     */
+    @GET("tree/json")
+    fun getKnowledgeTree(): Observable<HttpResult<List<KnowledgeTreeBody>>>
+
     /**
      * 知识体系下的文章
      * http://www.wanandroid.com/article/list/0/json?cid=168
@@ -49,12 +49,12 @@ interface ApiService {
     @GET("article/list/{page}/json")
     fun getKnowledgeList(@Path("page") page: Int, @Query("cid") cid: Int): Observable<HttpResult<ArticleResponseBody>>
 
-//    /**
-//     * 导航数据
-//     * http://www.wanandroid.com/navi/json
-//     */
-//    @GET("navi/json")
-//    fun getNavigationList(): Observable<HttpResult<List<NavigationBean>>>
+    /**
+     * 导航数据
+     * http://www.wanandroid.com/navi/json
+     */
+    @GET("navi/json")
+    fun getNavigationList(): Observable<HttpResult<List<NavigationBean>>>
 //
 //    /**
 //     * 项目数据
