@@ -40,15 +40,15 @@ interface ApiService {
 //    @GET("tree/json")
 //    fun getKnowledgeTree(): Observable<HttpResult<List<KnowledgeTreeBody>>>
 //
-//    /**
-//     * 知识体系下的文章
-//     * http://www.wanandroid.com/article/list/0/json?cid=168
-//     * @param page
-//     * @param cid
-//     */
-//    @GET("article/list/{page}/json")
-//    fun getKnowledgeList(@Path("page") page: Int, @Query("cid") cid: Int): Observable<HttpResult<ArticleResponseBody>>
-//
+    /**
+     * 知识体系下的文章
+     * http://www.wanandroid.com/article/list/0/json?cid=168
+     * @param page
+     * @param cid
+     */
+    @GET("article/list/{page}/json")
+    fun getKnowledgeList(@Path("page") page: Int, @Query("cid") cid: Int): Observable<HttpResult<ArticleResponseBody>>
+
 //    /**
 //     * 导航数据
 //     * http://www.wanandroid.com/navi/json
@@ -253,12 +253,12 @@ interface ApiService {
 //    @FormUrlEncoded
 //    fun updateTodo(@Path("id") id: Int, @FieldMap map: MutableMap<String, Any>): Observable<HttpResult<Any>>
 //
-//    /**
-//     * 获取公众号列表
-//     * http://wanandroid.com/wxarticle/chapters/json
-//     */
-//    @GET("/wxarticle/chapters/json")
-//    fun getWXChapters(): Observable<HttpResult<MutableList<WXChapterBean>>>
+    /**
+     * 获取公众号列表
+     * http://wanandroid.com/wxarticle/chapters/json
+     */
+    @GET("/wxarticle/chapters/json")
+    fun getWXChapters(): Observable<HttpResult<MutableList<WXChapterBean>>>
 //
 //    /**
 //     * 查看某个公众号历史数据

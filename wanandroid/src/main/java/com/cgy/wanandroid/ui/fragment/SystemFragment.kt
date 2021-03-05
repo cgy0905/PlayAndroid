@@ -6,13 +6,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.cgy.wanandroid.R
+import com.cgy.wanandroid.base.BaseMvpFragment
 
 /**
  * @author: cgy
  * @date: 2021/2/4 10:44 AM
  * @description:
  */
-class SystemFragment : Fragment () {
+class SystemFragment : Fragment() {
 
     companion object {
         fun getInstance() : SystemFragment = SystemFragment()
