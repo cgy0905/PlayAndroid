@@ -139,6 +139,7 @@ class MainActivity : BaseMvpActivity<MainContract.View, MainContract.Presenter>(
 
     override fun start() {
         //获取用户信息
+        mPresenter?.getUserInfo()
     }
 
     override fun initColor() {
@@ -172,6 +173,7 @@ class MainActivity : BaseMvpActivity<MainContract.View, MainContract.Presenter>(
         }
         nav_rank?.setOnClickListener{
             //跳转排行榜页面
+            startActivity(Intent(this, RankActivity::class.java))
         }
     }
 
@@ -306,6 +308,9 @@ class MainActivity : BaseMvpActivity<MainContract.View, MainContract.Presenter>(
                 R.id.nav_score -> {
                     if (isLogin) {
                         //跳转积分界面
+                        Intent(this, ScoreActivity::class.java).run {
+                            startActivity(this)
+                        }
                     } else {
                         showToast(resources.getString(R.string.login_tint))
                         goLogin()

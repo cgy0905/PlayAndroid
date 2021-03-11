@@ -289,31 +289,31 @@ interface ApiService {
     @GET("/lg/coin/userinfo/json")
     fun getUserInfo(): Observable<HttpResult<UserInfoBody>>
 
-//
-//    /**
-//     * 获取个人积分列表，需要登录后访问
-//     * https://www.wanandroid.com//lg/coin/list/1/json
-//     * @param page 页码 从1开始
-//     */
-//    @GET("/lg/coin/list/{page}/json")
-//    fun getUserScoreList(@Path("page") page: Int): Observable<HttpResult<BaseListResponseBody<UserScoreBean>>>
-//
-//    /**
-//     * 获取积分排行榜
-//     * https://www.wanandroid.com/coin/rank/1/json
-//     * @param page 页码 从1开始
-//     */
-//    @GET("/coin/rank/{page}/json")
-//    fun getRankList(@Path("page") page: Int): Observable<HttpResult<BaseListResponseBody<CoinInfoBean>>>
-//
-//    /**
-//     * 自己的分享的文章列表
-//     * https://wanandroid.com/user/lg/private_articles/1/json
-//     * @param page 页码 从1开始
-//     */
-//    @GET("user/lg/private_articles/{page}/json")
-//    fun getShareList(@Path("page") page: Int): Observable<HttpResult<ShareResponseBody>>
-//
+
+    /**
+     * 获取个人积分列表，需要登录后访问
+     * https://www.wanandroid.com//lg/coin/list/1/json
+     * @param page 页码 从1开始
+     */
+    @GET("/lg/coin/list/{page}/json")
+    fun getUserScoreList(@Path("page") page: Int): Observable<HttpResult<BaseListResponseBody<UserScoreBean>>>
+
+    /**
+     * 获取积分排行榜
+     * https://www.wanandroid.com/coin/rank/1/json
+     * @param page 页码 从1开始
+     */
+    @GET("/coin/rank/{page}/json")
+    fun getRankList(@Path("page") page: Int): Observable<HttpResult<BaseListResponseBody<CoinInfoBean>>>
+
+    /**
+     * 自己的分享的文章列表
+     * https://wanandroid.com/user/lg/private_articles/1/json
+     * @param page 页码 从1开始
+     */
+    @GET("user/lg/private_articles/{page}/json")
+    fun getShareList(@Path("page") page: Int): Observable<HttpResult<ShareResponseBody>>
+
     /**
      * 分享文章
      * https://www.wanandroid.com/lg/user_article/add/json

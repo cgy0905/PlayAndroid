@@ -129,16 +129,16 @@ class SquareFragment : BaseMvpListFragment<SquareContract.View, SquarePresenter>
         }
     }
 
-    override fun showSquareList(body: ArticleResponseBody) {
-        body.datas.let {
+    override fun showSquareList(data: ArticleResponseBody) {
+        data.datas.let {
             mAdapter.run {
                 if (isRefresh) {
                     replaceData(it)
                 } else {
                     addData(it)
                 }
-                pageSize = body.size
-                if (body.over) {
+                pageSize = data.size
+                if (data.over) {
                     loadMoreEnd(isRefresh)
                 } else {
                     loadMoreComplete()

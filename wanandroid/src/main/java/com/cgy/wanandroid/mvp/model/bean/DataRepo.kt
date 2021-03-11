@@ -187,3 +187,30 @@ data class CollectionArticle(
     @Json(name = "visible") val visible: Int,
     @Json(name = "zan") val zan: Int
 )
+
+// 个人积分实体
+data class UserScoreBean(
+    @Json(name = "coinCount") val coinCount: Int,
+    @Json(name = "date") val date: Long,
+    @Json(name = "desc") val desc: String,
+    @Json(name = "id") val id: Int,
+    @Json(name = "reason") val reason: String,
+    @Json(name = "type") val type: Int,
+    @Json(name = "userId") val userId: Int,
+    @Json(name = "userName") val userName: String
+)
+
+// 排行榜实体
+data class CoinInfoBean(
+    @Json(name = "coinCount") val coinCount: Int,
+    @Json(name = "level") val level: Int,
+    @Json(name = "rank") val rank: Int,
+    @Json(name = "userId") val userId: Int,
+    @Json(name = "username") val username: String
+)
+
+// 我的分享
+data class ShareResponseBody(
+    val coinInfo: CoinInfoBean,
+    val shareArticles: ArticleResponseBody
+)
