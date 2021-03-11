@@ -379,7 +379,10 @@ class MainActivity : BaseMvpActivity<MainContract.View, MainContract.Presenter>(
 
 
     private fun goCommonActivity(type: String) {
-
+        Intent(this, CommonActivity::class.java).run {
+            putExtra(Constant.TYPE_KEY, type)
+            startActivity(this)
+        }
     }
 
 

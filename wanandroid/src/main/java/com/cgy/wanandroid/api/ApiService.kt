@@ -102,15 +102,15 @@ interface ApiService {
      */
     @GET("user/logout/json")
     fun logout(): Observable<HttpResult<Any>>
-//
-//    /**
-//     *  获取收藏列表
-//     *  http://www.wanandroid.com/lg/collect/list/0/json
-//     *  @param page
-//     */
-//    @GET("lg/collect/list/{page}/json")
-//    fun getCollectList(@Path("page") page: Int): Observable<HttpResult<BaseListResponseBody<CollectionArticle>>>
-//
+
+    /**
+     *  获取收藏列表
+     *  http://www.wanandroid.com/lg/collect/list/0/json
+     *  @param page
+     */
+    @GET("lg/collect/list/{page}/json")
+    fun getCollectList(@Path("page") page: Int): Observable<HttpResult<BaseListResponseBody<CollectionArticle>>>
+
     /**
      * 收藏站内文章
      * http://www.wanandroid.com/lg/collect/1165/json
@@ -139,18 +139,18 @@ interface ApiService {
      */
     @POST("lg/uncollect_originId/{id}/json")
     fun cancelCollectArticle(@Path("id") id: Int): Observable<HttpResult<Any>>
-//
-//    /**
-//     * 收藏列表中取消收藏文章
-//     * http://www.wanandroid.com/lg/uncollect/2805/json
-//     * @param id
-//     * @param originId
-//     */
-//    @POST("lg/uncollect/{id}/json")
-//    @FormUrlEncoded
-//    fun removeCollectArticle(@Path("id") id: Int,
-//                             @Field("originId") originId: Int = -1): Observable<HttpResult<Any>>
-//
+
+    /**
+     * 收藏列表中取消收藏文章
+     * http://www.wanandroid.com/lg/uncollect/2805/json
+     * @param id
+     * @param originId
+     */
+    @POST("lg/uncollect/{id}/json")
+    @FormUrlEncoded
+    fun removeCollectArticle(@Path("id") id: Int,
+                             @Field("originId") originId: Int = -1): Observable<HttpResult<Any>>
+
     /**
      * 搜索热词
      * http://www.wanandroid.com/hotkey/json

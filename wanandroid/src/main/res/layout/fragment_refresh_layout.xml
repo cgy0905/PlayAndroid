@@ -19,7 +19,8 @@
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recyclerView"
-            style="@style/RecyclerViewStyle" />
+            style="@style/RecyclerViewStyle"
+            tools:listitem="@layout/item_home_list"/>
 
     </android.support.v4.widget.SwipeRefreshLayout>
 

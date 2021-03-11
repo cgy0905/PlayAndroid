@@ -5,6 +5,7 @@ import com.cgy.wanandroid.base.BaseFragment
 import com.cgy.wanandroid.base.BaseSwipeBackActivity
 import com.cgy.wanandroid.constant.Constant
 import com.cgy.wanandroid.event.ColorEvent
+import com.cgy.wanandroid.ui.fragment.CollectFragment
 import com.cgy.wanandroid.ui.fragment.QrCodeFragment
 import com.cgy.wanandroid.ui.fragment.SearchListFragment
 import com.cgy.wanandroid.ui.fragment.ShareArticleFragment
@@ -32,10 +33,10 @@ class CommonActivity : BaseSwipeBackActivity() {
             supportActionBar?.setDisplayHomeAsUpEnabled(true)
         }
         val fragment: BaseFragment? =  when (mType) {
-//            Constant.Type.COLLECT_TYPE_KEY -> {
-//                toolbar.title = getString(R.string.collect)
-//                CollectFragment.getInstance(extras)
-//            }
+            Constant.Type.COLLECT_TYPE_KEY -> {
+                toolbar.title = getString(R.string.collect)
+                CollectFragment.getInstance(extras)
+            }
 
             Constant.Type.SEARCH_TYPE_KEY -> {
                 toolbar.title = extras.getString(Constant.SEARCH_KEY, "")
