@@ -327,6 +327,7 @@ class MainActivity : BaseMvpActivity<MainContract.View, MainContract.Presenter>(
                 R.id.nav_share -> {
                     if (isLogin) {
                         //分享页面
+                        startActivity(Intent(this, ShareActivity::class.java))
                     } else {
                         showToast(resources.getString(R.string.login_tint))
                         goLogin()
