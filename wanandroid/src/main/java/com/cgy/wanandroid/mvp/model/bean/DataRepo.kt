@@ -215,6 +215,13 @@ data class ShareResponseBody(
     val shareArticles: ArticleResponseBody
 )
 
+// TODO工具 类型
+data class TodoTypeBean(
+    val type: Int,
+    val name: String,
+    var isSelected: Boolean
+)
+
 // TODO实体类
 data class TodoBean(
     @Json(name = "id") val id: Int,
@@ -252,3 +259,4 @@ data class TodoResponseBody(
     @Json(name = "size") val size: Int,
     @Json(name = "total") val total: Int
 )
+

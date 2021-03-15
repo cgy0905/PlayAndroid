@@ -134,7 +134,7 @@ abstract class BaseActivity : AppCompatActivity() {
     }
 
     open fun initColor() {
-        mThemeColor = if (SettingUtil.getIsNightMode()) {
+        mThemeColor = if (!SettingUtil.getIsNightMode()) {
             SettingUtil.getColor()
         } else {
             resources.getColor(R.color.colorPrimary)

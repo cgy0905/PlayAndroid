@@ -354,6 +354,9 @@ class MainActivity : BaseMvpActivity<MainContract.View, MainContract.Presenter>(
                 R.id.nav_todo -> {
                     if (isLogin) {
                         //跳转todo页面
+                        Intent(this, TodoActivity::class.java).run {
+                            startActivity(this)
+                        }
                     } else {
                         showToast(resources.getString(R.string.login_tint))
                         goLogin()
