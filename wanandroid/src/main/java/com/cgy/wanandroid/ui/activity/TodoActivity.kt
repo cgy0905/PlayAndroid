@@ -36,6 +36,9 @@ class TodoActivity : BaseSwipeBackActivity() {
 
     private lateinit var datas: MutableList<TodoTypeBean>
 
+    /**
+     * PopupWindow
+     */
     private var mSwitchPopupWindow: PopupWindow? = null
 
 

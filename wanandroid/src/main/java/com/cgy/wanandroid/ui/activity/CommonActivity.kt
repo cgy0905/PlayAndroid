@@ -5,10 +5,7 @@ import com.cgy.wanandroid.base.BaseFragment
 import com.cgy.wanandroid.base.BaseSwipeBackActivity
 import com.cgy.wanandroid.constant.Constant
 import com.cgy.wanandroid.event.ColorEvent
-import com.cgy.wanandroid.ui.fragment.CollectFragment
-import com.cgy.wanandroid.ui.fragment.QrCodeFragment
-import com.cgy.wanandroid.ui.fragment.SearchListFragment
-import com.cgy.wanandroid.ui.fragment.ShareArticleFragment
+import com.cgy.wanandroid.ui.fragment.*
 import kotlinx.android.synthetic.main.toolbar.*
 import org.greenrobot.eventbus.EventBus
 
@@ -41,6 +38,21 @@ class CommonActivity : BaseSwipeBackActivity() {
             Constant.Type.SEARCH_TYPE_KEY -> {
                 toolbar.title = extras.getString(Constant.SEARCH_KEY, "")
                 SearchListFragment.getInstance(extras)
+            }
+
+            Constant.Type.ADD_TODO_TYPE_KEY -> {
+                toolbar.title = getString(R.string.add)
+                AddTodoFragment.getInstance(extras)
+            }
+
+            Constant.Type.EDIT_TODO_TYPE_KEY -> {
+                toolbar.title = getString(R.string.edit)
+                AddTodoFragment.getInstance(extras)
+            }
+
+            Constant.Type.SEE_TODO_TYPE_KEY -> {
+                toolbar.title = getString(R.string.see)
+                AddTodoFragment.getInstance(extras)
             }
 
             Constant.Type.SHARE_ARTICLE_TYPE_KEY -> {
