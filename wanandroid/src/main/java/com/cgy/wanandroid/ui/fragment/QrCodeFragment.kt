@@ -1,6 +1,7 @@
 package com.cgy.wanandroid.ui.fragment
 
 import android.view.View
+import com.cgy.wanandroid.R
 import com.cgy.wanandroid.base.BaseFragment
 
 /**
@@ -14,15 +15,13 @@ class QrCodeFragment : BaseFragment() {
         fun getInstance(): QrCodeFragment = QrCodeFragment()
     }
 
-    override fun attachLayoutRes(): Int {
-        TODO("Not yet implemented")
-    }
+    override fun attachLayoutRes(): Int  = R.layout.fragment_qr_code
 
     override fun initView(view: View) {
-        TODO("Not yet implemented")
+
     }
 
     override fun lazyLoad() {
-        TODO("Not yet implemented")
+
     }
 }

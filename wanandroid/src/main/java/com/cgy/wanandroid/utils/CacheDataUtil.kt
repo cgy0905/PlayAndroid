@@ -1,4 +1,4 @@
-package com.cxz.wanandroid.utils
+package com.cgy.wanandroid.utils
 
 import android.content.Context
 import android.os.Environment
@@ -7,12 +7,13 @@ import java.math.BigDecimal
 import kotlin.jvm.Throws
 
 /**
- * Created by chenxz on 2018/6/18.
+ * @author: cgy
+ * @date: 2021/3/16 5:24 PM
+ * @description:
  */
 object CacheDataUtil {
 
-    @Throws(Exception::class)
-    fun getTotalCacheSize(context: Context): String {
+    fun getTotalCacheSize(context: Context) : String {
 
         var cacheSize = getFolderSize(context.cacheDir)
         if (Environment.getExternalStorageState() == Environment.MEDIA_MOUNTED) {
@@ -22,15 +23,13 @@ object CacheDataUtil {
     }
 
     fun clearAllCache(context: Context) {
-
         deleteDir(context.cacheDir)
         if (Environment.getExternalStorageState() == Environment.MEDIA_MOUNTED) {
             deleteDir(context.externalCacheDir)
         }
     }
 
-    private fun deleteDir(dir: File?): Boolean {
-
+    private fun deleteDir(dir : File?) : Boolean {
         if (dir != null && dir.isDirectory) {
             val children = dir.list()
             for (i in children!!.indices) {
@@ -51,30 +50,24 @@ object CacheDataUtil {
      * SDCard/Android/data/你的应用包名/cache/目录，一般存放临时缓存数据
      */
     @Throws(Exception::class)
-    fun getFolderSize(file: File?): Long {
-        var size: Long = 0
+    fun getFolderSize(file: File?) : Long {
+        var size : Long = 0
         try {
             val fileList = file!!.listFiles()
             for (i in fileList!!.indices) {
-                // 如果下面还有文件
                 if (fileList[i].isDirectory) {
                     size += getFolderSize(fileList[i])
                 } else {
                     size += fileList[i].length()
                 }
             }
-        } catch (e: Exception) {
+        } catch (e : Exception) {
             e.printStackTrace()
         }
-
         return size
     }
 
-    /**
-     * 格式化单位
-     */
-    fun getFormatSize(size: Double): String {
-
+    fun getFormatSize(size : Double) : String {
         val kiloByte = size / 1024
         if (kiloByte < 1) {
             return size.toString() + "Byte"
@@ -93,7 +86,6 @@ object CacheDataUtil {
             val result2 = BigDecimal(java.lang.Double.toString(megaByte))
             return result2.setScale(2, BigDecimal.ROUND_HALF_UP).toPlainString() + "MB"
         }
-
         val teraBytes = gigaByte / 1024
 
         if (teraBytes < 1) {
@@ -104,5 +96,4 @@ object CacheDataUtil {
         val result4 = BigDecimal(teraBytes)
         return result4.setScale(2, BigDecimal.ROUND_HALF_UP).toPlainString() + "TB"
     }
-
 }

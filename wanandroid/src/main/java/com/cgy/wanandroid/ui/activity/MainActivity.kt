@@ -25,6 +25,7 @@ import com.cgy.wanandroid.mvp.model.bean.UserInfoBody
 import com.cgy.wanandroid.mvp.contract.MainContract
 import com.cgy.wanandroid.mvp.presenter.MainPresenter
 import com.cgy.wanandroid.ui.fragment.*
+import com.cgy.wanandroid.ui.setting.SettingActivity
 import com.cgy.wanandroid.utils.DialogUtil
 import com.cgy.wanandroid.utils.Preference
 import com.cgy.wanandroid.utils.SettingUtil
@@ -335,6 +336,9 @@ class MainActivity : BaseMvpActivity<MainContract.View, MainContract.Presenter>(
                 }
                 R.id.nav_setting -> {
                     //跳转设置界面
+                    Intent(this, SettingActivity::class.java).run {
+                        startActivity(this)
+                    }
                 }
                 R.id.nav_logout -> {
                     logout()

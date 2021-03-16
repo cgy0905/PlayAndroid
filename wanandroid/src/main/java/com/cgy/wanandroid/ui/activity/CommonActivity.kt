@@ -35,6 +35,11 @@ class CommonActivity : BaseSwipeBackActivity() {
                 CollectFragment.getInstance(extras)
             }
 
+            Constant.Type.ABOUT_US_TYPE_KEY -> {
+                toolbar.title = getString(R.string.about_us)
+                AboutFragment.getInstance(extras)
+            }
+
             Constant.Type.SEARCH_TYPE_KEY -> {
                 toolbar.title = extras.getString(Constant.SEARCH_KEY, "")
                 SearchListFragment.getInstance(extras)

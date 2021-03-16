@@ -24,8 +24,8 @@ import com.cgy.wanandroid.ext.getAgentWeb
 import com.cgy.wanandroid.mvp.contract.ContentContract
 import com.cgy.wanandroid.mvp.presenter.ContentPresenter
 import com.cgy.wanandroid.webclient.WebClientFactory
+import com.cgy.wanandroid.widget.NestedScrollAgentWebView
 import com.just.agentweb.AgentWeb
-import com.just.agentweb.NestedScrollAgentWebView
 import kotlinx.android.synthetic.main.activity_content.*
 import kotlinx.android.synthetic.main.toolbar.*
 

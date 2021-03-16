@@ -1,8 +1,14 @@
 package com.cgy.wanandroid.ui.fragment
 
+import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
+import android.text.Html
+import android.text.method.LinkMovementMethod
 import android.view.View
+import com.cgy.wanandroid.R
 import com.cgy.wanandroid.base.BaseFragment
+import com.cgy.wanandroid.utils.SettingUtil
+import kotlinx.android.synthetic.main.fragment_about.*
 
 /**
  * @author: cgy
@@ -19,15 +25,27 @@ class AboutFragment : BaseFragment() {
         }
     }
 
-    override fun attachLayoutRes(): Int {
-        TODO("Not yet implemented")
-    }
+    override fun attachLayoutRes(): Int = R.layout.fragment_about
 
     override fun initView(view: View) {
-        TODO("Not yet implemented")
+        about_content.run {
+            text = Html.fromHtml(getString(R.string.about_content))
+            movementMethod = LinkMovementMethod.getInstance()
+        }
+
+        val versionStr = getString(R.string.app_name) + "V" + activity?.packageManager?.getPackageInfo(activity?.packageName, 0)?.versionName
+        about_version.text = versionStr
+
+        setLogoBg()
+    }
+
+    private fun setLogoBg() {
+        val drawable = iv_logo.background as GradientDrawable
+        drawable.setColor(SettingUtil.getColor())
+        iv_logo.setBackgroundDrawable(drawable)
     }
 
     override fun lazyLoad() {
-        TODO("Not yet implemented")
+
     }
 }
