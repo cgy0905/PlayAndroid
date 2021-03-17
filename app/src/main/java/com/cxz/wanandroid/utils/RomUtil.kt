@@ -23,7 +23,7 @@ object RomUtil {
         return isMIUIV6OrAbove() || isFlymeV4OrAbove() || isAndroidMOrAbove()
     }
 
-    fun getLightStatausBarAvailableRomType(): Int {
+    fun getLightStatusBarAvailableRomType(): Int {
         if (isMIUIV6OrAbove()) {
             return AvailableRomType.MIUI
         }

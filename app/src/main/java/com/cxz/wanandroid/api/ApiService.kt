@@ -78,8 +78,8 @@ interface ApiService {
      */
     @POST("user/login")
     @FormUrlEncoded
-    fun loginWanAndroid(@Field("username") username: String,
-                        @Field("password") password: String): Observable<HttpResult<LoginData>>
+    fun login(@Field("username") username: String,
+              @Field("password") password: String): Observable<HttpResult<LoginData>>
 
     /**
      * 注册
@@ -90,9 +90,9 @@ interface ApiService {
      */
     @POST("user/register")
     @FormUrlEncoded
-    fun registerWanAndroid(@Field("username") username: String,
-                           @Field("password") password: String,
-                           @Field("repassword") repassword: String): Observable<HttpResult<LoginData>>
+    fun register(@Field("username") username: String,
+                 @Field("password") password: String,
+                 @Field("repassword") repassword: String): Observable<HttpResult<LoginData>>
 
     /**
      * 退出登录

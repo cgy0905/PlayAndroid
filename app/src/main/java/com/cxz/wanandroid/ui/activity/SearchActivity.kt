@@ -15,7 +15,6 @@ import com.cxz.wanandroid.R
 import com.cxz.wanandroid.adapter.SearchHistoryAdapter
 import com.cxz.wanandroid.base.BaseMvpSwipeBackActivity
 import com.cxz.wanandroid.constant.Constant
-import com.cxz.wanandroid.ext.showToast
 import com.cxz.wanandroid.mvp.contract.SearchContract
 import com.cxz.wanandroid.mvp.model.bean.HotSearchBean
 import com.cxz.wanandroid.mvp.model.bean.SearchHistoryBean

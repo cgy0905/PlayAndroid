@@ -109,7 +109,7 @@ class LoginActivity : BaseMvpActivity<LoginContract.View, LoginContract.Presente
      */
     private fun login() {
         if (validate()) {
-            mPresenter?.loginWanAndroid(et_username.text.toString(), et_password.text.toString())
+            mPresenter?.login(et_username.text.toString(), et_password.text.toString())
         }
     }
 

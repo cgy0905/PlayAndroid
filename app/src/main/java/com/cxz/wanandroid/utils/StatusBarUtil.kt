@@ -7,7 +7,6 @@ import android.graphics.Color
 import android.os.Build
 import android.support.annotation.ColorInt
 import android.support.annotation.IntRange
-import android.support.annotation.RequiresApi
 import android.support.design.widget.CoordinatorLayout
 import android.support.v4.widget.DrawerLayout
 import android.view.View
@@ -729,7 +728,7 @@ object StatusBarUtil {
      * @param dark 是否为黑色
      */
     fun setLightStatusBar(activity: Activity, dark: Boolean) {
-        when (RomUtil.getLightStatausBarAvailableRomType()) {
+        when (RomUtil.getLightStatusBarAvailableRomType()) {
             RomUtil.AvailableRomType.MIUI -> setMIUILightStatusBar(activity, dark)
 
             RomUtil.AvailableRomType.FLYME -> setFlymeLightStatusBar(activity, dark)

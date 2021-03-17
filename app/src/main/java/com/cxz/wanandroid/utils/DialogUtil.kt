@@ -65,11 +65,11 @@ object DialogUtil {
     }
 
     fun getConfirmDialog(context: Context, message: String,
-                         onOKClickListener: DialogInterface.OnClickListener, onCancleClickListener: DialogInterface.OnClickListener): AlertDialog.Builder {
+                         onOKClickListener: DialogInterface.OnClickListener, onCancelClickListener: DialogInterface.OnClickListener): AlertDialog.Builder {
         val builder = getDialog(context)
         builder.setMessage(message)
         builder.setPositiveButton("确定", onOKClickListener)
-        builder.setNegativeButton("取消", onCancleClickListener)
+        builder.setNegativeButton("取消", onCancelClickListener)
         return builder
     }
 
@@ -99,20 +99,20 @@ object DialogUtil {
      * @param onClickListener
      * @param onOKClickListener
      * 点击确定的回调接口
-     * @param onCancleClickListener
+     * @param onCancelClickListener
      * 点击取消的回调接口
      * @return
      */
     fun getSingleChoiceDialog(context: Context, title: String, arrays: Array<String>,
                               selectIndex: Int, onClickListener: DialogInterface.OnClickListener,
-                              onOKClickListener: DialogInterface.OnClickListener, onCancleClickListener: DialogInterface.OnClickListener? = null): AlertDialog.Builder {
+                              onOKClickListener: DialogInterface.OnClickListener, onCancelClickListener: DialogInterface.OnClickListener? = null): AlertDialog.Builder {
         val builder = getDialog(context)
         builder.setSingleChoiceItems(arrays, selectIndex, onClickListener)
         if (!TextUtils.isEmpty(title)) {
             builder.setTitle(title)
         }
         builder.setPositiveButton("确定", onOKClickListener)
-        builder.setNegativeButton("取消", onCancleClickListener)
+        builder.setNegativeButton("取消", onCancelClickListener)
         return builder
     }
 
@@ -144,20 +144,20 @@ object DialogUtil {
      * @param onMultiChoiceClickListener
      * @param onOKClickListener
      * 点击确定的回调接口
-     * @param onCancleListener
+     * @param onCancelListener
      * 点击取消的回调接口
      * @return
      */
     fun getMultiChoiceDialog(context: Context, title: String, arrays: Array<String>,
                              checkedItems: BooleanArray, onMultiChoiceClickListener: DialogInterface.OnMultiChoiceClickListener,
-                             onOKClickListener: DialogInterface.OnClickListener, onCancleListener: DialogInterface.OnClickListener): AlertDialog.Builder {
+                             onOKClickListener: DialogInterface.OnClickListener, onCancelListener: DialogInterface.OnClickListener): AlertDialog.Builder {
         val builder = getDialog(context)
         builder.setMultiChoiceItems(arrays, checkedItems, onMultiChoiceClickListener)
         if (!TextUtils.isEmpty(title)) {
             builder.setTitle(title)
         }
         builder.setPositiveButton("确定", onOKClickListener)
-        builder.setNegativeButton("取消", onCancleListener)
+        builder.setNegativeButton("取消", onCancelListener)
         return builder
     }
 

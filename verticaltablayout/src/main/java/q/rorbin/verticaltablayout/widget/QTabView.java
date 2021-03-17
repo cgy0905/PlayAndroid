@@ -8,20 +8,11 @@ import android.os.Build;
 import android.support.annotation.Px;
 import android.support.annotation.RequiresApi;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.Gravity;
-import android.view.View;
-import android.widget.Checkable;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import q.rorbin.badgeview.Badge;
-import q.rorbin.badgeview.QBadgeView;
-import q.rorbin.verticaltablayout.util.DisplayUtil;
-
-import static android.R.attr.checked;
-import static android.R.attr.gravity;
 
 /**
  * @author chqiu

@@ -103,7 +103,7 @@ class RegisterActivity : BaseMvpActivity<RegisterContract.View, RegisterContract
      */
     private fun register() {
         if (validate()) {
-            mPresenter?.registerWanAndroid(et_username.text.toString(),
+            mPresenter?.register(et_username.text.toString(),
                     et_password.text.toString(),
                     et_password2.text.toString())
         }

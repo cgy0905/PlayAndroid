@@ -178,8 +178,9 @@ class ShareActivity : BaseMvpSwipeBackActivity<ShareContract.View, SharePresente
      * ItemClickListener
      */
     private val onItemClickListener = BaseQuickAdapter.OnItemClickListener { _, _, position ->
-        if (datas.isNotEmpty()) {
+        if (datas.size != 0) {
             val data = datas[position]
+            ContentActivity.start(this, data.id, data.title, data.link)
         }
     }
 

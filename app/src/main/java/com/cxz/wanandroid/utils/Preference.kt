@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.SharedPreferences
 import com.cxz.wanandroid.app.App
 import java.io.*
+import kotlin.jvm.Throws
 import kotlin.reflect.KProperty
 
 /**
