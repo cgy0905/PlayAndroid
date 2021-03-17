@@ -20,18 +20,11 @@
 [11]:https://img.shields.io/badge/QQ-563859095-orange.svg
 [12]:http://wpa.qq.com/msgrd?v=3&uin=563859095&site=qq&menu=yes
 
-- **Flutter 版 WANAndroid 客户端：[https://github.com/iceCola7/flutter_wanandroid](https://github.com/iceCola7/flutter_wanandroid)**
-- **Kotlin 版 MVP 基础框架：[https://github.com/iceCola7/KotlinMVPSamples](https://github.com/iceCola7/KotlinMVPSamples)**
-- **Java 版 MVP 基础框架：[https://github.com/iceCola7/MVPSamples](https://github.com/iceCola7/MVPSamples)**
-- **Github 项目地址：[https://github.com/iceCola7/WanAndroid](https://github.com/iceCola7/WanAndroid)**
-
-**开源不易，如果喜欢的话希望给个 `Star` 或 `Fork` ^_^ ，谢谢~~**
-
 ## 前言
 前段时间学习了 `Kotlin` 的语法知识，然后就写了这个项目熟悉一下 `Kotlin` 语言，总体下来，感觉很爽，相比 `Java` 而言代码行数较少，方法数减少，再加上 `lambda` 语法让代码更加清晰。
 
 ## 简介
-[WanAndroid](https://github.com/iceCola7/WanAndroid) 采用 `Kotlin` 语言编写，结合 `MVP` + `RxJava` + `Retrofit` + `Glide` + `EventBus` 等架构设计的项目，项目代码结构清晰并且有详细注释，如有任何疑问和建议请提 [Issues](https://github.com/iceCola7/WanAndroid/issues) 或联系 qq： **563859095** ，**项目会持续迭代维护，努力打造一款优秀的 [WanAndroid](http://www.wanandroid.com/) 客户端**。
+[WanAndroid](https://github.com/cgy0905/PlayAndroid) 采用 `Kotlin` 语言编写，结合 `MVP` + `RxJava` + `Retrofit` + `Glide` + `EventBus` 等架构设计的项目，项目代码结构清晰并且有详细注释，如有任何疑问和建议请提 [Issues](https://github.com/cgy0905/WanAndroid/issues) 或联系 qq： **1020110023** ，**项目会持续迭代维护，努力打造一款优秀的 [WanAndroid](http://www.wanandroid.com/) 客户端**。
 
 ## API
 [**玩 Android 开放 API**](http://www.wanandroid.com/blog/show/2)
@@ -96,105 +89,6 @@
  - [FloatingActionButton](https://github.com/Clans/FloatingActionButton)
  - [MaterialDateTimePicker](https://github.com/wdullaer/MaterialDateTimePicker)
  - [AndroidAutoSize](https://github.com/JessYanCoding/AndroidAutoSize)
-
-## 更新日志
-
-**[最新更新日志请点击查看](https://github.com/iceCola7/WanAndroid/releases)**
-
-**v1.1.5**
-
-- 修复部分文章打开有广告的问题；
-- 新增夜间模式下打开文章；
-- 修复设置页链接跳转的问题。
-
-**v1.1.4**
-
-- 新增广场模块；
-- 新增我的分享、分享文章、删除分享文章功能；
-- 优化知识体系和导航到体系模块；
-- 新增扫码下载；
-- 关于我们移动到设置页面；
-- 集成 `Tinker` 热更新；
-- 优化代码和界面，修复已知问题。
-
-**v1.1.3**
-
-- 修复部分文章作者不显示问题；
-- 增加官方网站。
-
-**v1.1.2**
-
-- 新增我的积分功能；
-- 新增积分排行榜功能；
-- 优化登录、注册和更新界面 `UI` ；
-- 修复已知 `bug` 增强体验。
-
-**v1.1.1**
-
-- 玩 `Android` 接口升级为 `https` 。
-
-**v1.1.0**
-
-- 重构项目架构，优化代码；
-- 重构 `TODO` 功能模块；
-- 修改已知 `bug` 和部分 `UI` 。
-
-**v1.0.8**
-
-- 新增公众号模块，阅读公众号文章更方便；
-- 优化部分 `UI` ；
-- 修改已知 `bug` 。
-
-**v1.0.7**
-
-- 增加首页置顶文章；
-- 增加退出登录接口；
-- 增加手动检查更新；
-- 优化代码，修改已知 `bug` 。
-
-**v1.0.6**
-
-- 增加 `Lifecycle` 组件使得 `Presenter` 和 `Activity` 生命周期绑定；
-- 增加今日头条提供的屏幕适配方案，开源库 `AndroidAutoSize`；
-- 升级 `AgentWeb` 到 `4.0.2` 版本，并修改部分 `API` 改动的问题；
-- 增加网络请求失败后的请求重连操作，具体请查看类 [RetryWithDelay](https://github.com/iceCola7/WanAndroid/blob/master/app/src/main/java/com/cxz/wanandroid/http/function/RetryWithDelay.kt)；
-- 解决转屏时，项目页视图空白的问题；
-- 去掉 `Tablayout` 切换时的动画，优化体验；
-- 修改其他已知 `bug` 。
-
-**v1.0.5**
-
-- 增加TODO功能；
-- 增加有无网络的状态提示信息；
-- 增加无网切换到有网的重连操作；
-- 修改已知 `bug`，如：[#6](https://github.com/iceCola7/WanAndroid/issues/6) 。
-
-**v1.0.3**
-
-- 集成 `bugly` 应用内更新；
-- 优化沉浸式状态栏显示效果；
-- 优化登录注册界面；
-- 修改 `VerticalTabLayout` 的点击 `item` 滑动的问题；
-- 优化夜间模式和自动切换夜间模式。
-
-**v1.0.2**
-
-- 优化细节问题；
-- 修改已知 `bug` 。
-
-**v1.0.1**
-
-- 增加搜索功能，包含热门搜索和历史搜索；
-- 增加 `litepal` 数据库；
-- 增加 `bugly` 收集应用异常信息；
-- 增加 `Android-Debug-Database` 来查看数据库；
-- 修复已知 `bug` 。
-
-**v1.0.0**
-
-- 初始化版本，主要功能都已经完成。
-
-## Thanks
 
 **感谢所有优秀的开源项目 ^_^** 。
 
